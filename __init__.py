@@ -14,7 +14,6 @@ from pathlib import Path
 from typing import Any
 
 from PIL import Image
-
 from plugin.sdk.plugin import NekoPluginBase, Ok, SdkError, lifecycle, llm_tool, neko_plugin
 
 PLUGIN_DIR = Path(__file__).resolve().parent
