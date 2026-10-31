@@ -1,4 +1,6 @@
 [project]
 name = "kards_ai_assistant"
 version = "0.1.0"
-dependencies = ["Pillow>=10.0"]
+# Pillow ships with the N.E.K.O host runtime. Vendoring it would bundle a Linux
+# wheel whose .so members trip the packager's compression-ratio guard.
+dependencies = []
