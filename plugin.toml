@@ -1,0 +1,30 @@
+[plugin]
+id = "kards_ai_assistant"
+name = "KARDS AI 助手"
+description = "通过截图理解 KARDS，并在用户主动授权后使用真实桌面鼠标和键盘完成操作。"
+short_description = "KARDS 截图理解、悬浮球唤醒与桌面操控。"
+keywords = ["KARDS", "游戏", "截图", "桌面操控", "悬浮球", "AI", "game", "computer-use"]
+version = "0.1.0"
+type = "plugin"
+entry = "plugin.plugins.kards_ai_assistant:KardsAiAssistantPlugin"
+
+[plugin.author]
+name = "MIKU"
+
+[plugin.sdk]
+recommended = ">=0.1.0,<0.2.0"
+supported = ">=0.1.0,<0.3.0"
+
+[plugin.ui]
+enabled = true
+
+[[plugin.ui.panel]]
+id = "main"
+title = "KARDS AI 助手"
+entry = "static/index.html"
+context = "kards_ai_assistant"
+permissions = ["state:read"]
+
+[plugin_runtime]
+enabled = true
+auto_start = false
