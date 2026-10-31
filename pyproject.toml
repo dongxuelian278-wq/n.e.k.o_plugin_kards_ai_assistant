@@ -1,0 +1,4 @@
+[project]
+name = "kards_ai_assistant"
+version = "0.1.0"
+dependencies = ["Pillow>=10.0"]
