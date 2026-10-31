@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KARDS AI 助手 · 说明书喵</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f6eef4;
+      --dim: #b9a8b6;
+      --pink: #ff9ec4;
+      --pink-deep: #d96a9b;
+      --mint: #7fe3c0;
+      --sky: #8fd3ff;
+      --line: #3a2f3a;
+      --card: #1c1720;
+      --bg: #120f15;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 28px 20px 56px;
+      background:
+        radial-gradient(1100px 520px at 12% -10%, #2b1c2a 0%, transparent 60%),
+        radial-gradient(900px 460px at 92% 8%, #1b2536 0%, transparent 55%),
+        var(--bg);
+      color: var(--ink);
+      font: 15px/1.75 "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    main { max-width: 720px; margin: 0 auto; }
+
+    .cat { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+    .cat svg { width: 62px; height: 62px; flex: none; filter: drop-shadow(0 6px 16px rgba(255,158,196,.25)); }
+    h1 {
+      margin: 0; font-size: 26px; letter-spacing: .5px;
+      background: linear-gradient(96deg, var(--pink) 0%, #ffd6e7 46%, var(--sky) 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .sub { color: var(--dim); font-size: 13.5px; margin: 0; }
+
+    .hello {
+      margin: 18px 0 26px; padding: 16px 18px;
+      border: 1px solid var(--line); border-radius: 16px;
+      background: linear-gradient(180deg, #221a24 0%, #1a1519 100%);
+    }
+    .hello b { color: var(--pink); }
+
+    section {
+      border: 1px solid var(--line); border-radius: 16px;
+      padding: 18px 20px; margin-top: 16px; background: var(--card);
+    }
+    section > h2 {
+      margin: 0 0 10px; font-size: 16.5px; color: var(--ink);
+      display: flex; align-items: center; gap: 8px;
+    }
+    section > h2 .paw { color: var(--pink); font-size: 14px; }
+    p { margin: 8px 0; }
+    p.note { color: var(--dim); font-size: 14px; }
+
+    ol, ul { margin: 8px 0 4px; padding-left: 22px; }
+    li { margin: 7px 0; }
+    li::marker { color: var(--pink-deep); }
+
+    code {
+      font-family: "Cascadia Code", Consolas, monospace; font-size: 13px;
+      color: var(--sky); background: #12161c;
+      border: 1px solid #263140; border-radius: 6px; padding: 1px 6px;
+    }
+
+    .dots { display: grid; gap: 8px; margin-top: 10px; }
+    .dot-row { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+    .dot { width: 13px; height: 13px; border-radius: 50%; flex: none; box-shadow: 0 0 0 3px rgba(255,255,255,.05); }
+    .d-idle   { background: #3b8fe6; }
+    .d-wake   { background: #f2c76b; }
+    .d-active { background: #46d38a; }
+    .d-error  { background: #f18e8e; }
+
+    .tools { display: grid; gap: 10px; margin-top: 10px; }
+    .tool { border: 1px solid #2e2632; border-radius: 12px; padding: 10px 13px; background: #191420; }
+    .tool b { color: var(--mint); font-family: Consolas, monospace; font-size: 13.5px; }
+    .tool span { display: block; color: var(--dim); font-size: 13.5px; margin-top: 2px; }
+
+    .warn { border-color: #6b4a24; background: linear-gradient(180deg, #241a12 0%, #1b1512 100%); }
+    .warn h2 { color: #ffc98a; }
+    .warn .paw { color: #ffc98a; }
+
+    footer {
+      margin-top: 26px; text-align: center; color: #7d6f7c; font-size: 12.5px;
+      line-height: 2;
+    }
+    .tail { letter-spacing: 3px; color: var(--pink-deep); }
+  </style>
+</head>
+<body>
+<main>
+
+  <div class="cat">
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <defs>
+        <linearGradient id="fur" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffd3e4"/>
+          <stop offset="100%" stop-color="#ff9ec4"/>
+        </linearGradient>
+      </defs>
+      <path d="M14 22 L10 6 L26 15 Z" fill="url(#fur)"/>
+      <path d="M50 22 L54 6 L38 15 Z" fill="url(#fur)"/>
+      <circle cx="32" cy="36" r="20" fill="url(#fur)"/>
+      <ellipse cx="24" cy="34" rx="3" ry="4.2" fill="#2a1f2a"/>
+      <ellipse cx="40" cy="34" rx="3" ry="4.2" fill="#2a1f2a"/>
+      <circle cx="25.2" cy="32.4" r="1.1" fill="#fff"/>
+      <circle cx="41.2" cy="32.4" r="1.1" fill="#fff"/>
+      <path d="M32 41 l-3 2.6 h6 z" fill="#c9557f"/>
+      <path d="M32 44 q-3 3.6 -6 1.2 M32 44 q3 3.6 6 1.2" stroke="#c9557f" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M10 34 h8 M10 39 h8 M46 34 h8 M46 39 h8" stroke="#ffffff" stroke-opacity=".55" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <h1>KARDS AI 助手</h1>
+      <p class="sub">说明书 · v0.1.0 · 会自己打牌的小猫娘</p>
+    </div>
+  </div>
+
+  <div class="hello">
+    主人回来啦～ 这里是 <b>大肥鱼</b> 的操作手册喵。<br>
+    你只要点一下右下角那颗小球，我就自己去看屏幕、算指挥点、出牌、攻击，一局打到结算为止。
+    不用你手把手教，但读一下这份说明，我们会配合得更好哦 <span class="tail">(=^･ω･^=)</span>
+  </div>
+
+  <section>
+    <h2><span class="paw">❀</span>我到底是怎么打牌的呀</h2>
+    <p>三步循环，一直重复到有一方的总部爆炸喵：</p>
+    <ol>
+      <li><b>看</b> —— 截图，理解现在场上有谁、还有几点指挥点</li>
+      <li><b>想</b> —— 对照规则和卡组，决定这一回合要做什么</li>
+      <li><b>动</b> —— 用真实的鼠标去点，点完再截一张确认有没有生效</li>
+    </ol>
+    <p class="note">我不会读游戏内存、不会改网络包、也不开挂。对游戏来说，我就是一个手速有点慢、但看得很认真的人类喵。</p>
+  </section>
+
+  <section>
+    <h2><span class="paw">❀</span>三分钟上手</h2>
+    <ol>
+      <li>确认插件是<b>运行中</b>（就是卡片上那个绿点）</li>
+      <li>先把 KARDS 打开，进到<b>训练模式</b>的牌桌前</li>
+      <li>点一下悬浮球 —— 我先变黄（在醒过来），再变绿（开始打了）</li>
+      <li>打完了，<b>再点一下</b>球，或者右键选「唤醒 / 结束对局」，我就停手</li>
+    </ol>
+    <p class="note">球可以用鼠标拖到任意位置，位置会记住。右键菜单里还能「切到 N.E.K.O 窗口」。</p>
+  </section>
+
+  <section>
+    <h2><span class="paw">❀</span>球的颜色在偷偷说话</h2>
+    <div class="dots">
+      <div class="dot-row"><span class="dot d-idle"></span>蓝色 · 我闲着，等你叫我</div>
+      <div class="dot-row"><span class="dot d-wake"></span>黄色 · 醒过来了，正在准备</div>
+      <div class="dot-row"><span class="dot d-active"></span>绿色 · 正在打这局，别碰鼠标哦</div>
+      <div class="dot-row"><span class="dot d-error"></span>红色 · 刚才出错了，三秒后我会自己缓过来</div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="paw">❀</span>我的四个小爪子（工具）</h2>
+    <div class="tools">
+      <div class="tool"><b>kards_windows</b><span>找窗口在哪、有没有被最小化。只看不动。</span></div>
+      <div class="tool"><b>kards_screen</b><span>截图，把画面变成我能看懂的样子。</span></div>
+      <div class="tool"><b>kards_act</b><span>移动、点击、拖拽、滚轮、按键。每次动作后会自动再截一张，方便我确认。</span></div>
+      <div class="tool"><b>kards_knowledge</b><span>翻我的小本本：规则、卡组、卡牌数据库。</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="paw">❀</span>小本本要放在哪里呀</h2>
+    <p>把知识文件放进 <code>桌面/kards/</code>，我会在唤醒的时候自己读进来喵：</p>
+    <ul>
+      <li><code>kards_rules_zh.md</code> —— 规则速查（关键词、行动限制、报错含义）</li>
+      <li><code>kards_dahuayu.md</code> —— 卡组和打法手册</li>
+      <li><code>kards_db_*.md</code> —— 卡牌数据</li>
+    </ul>
+    <p class="note">也可以放在 <code>%LOCALAPPDATA%/N.E.K.O/kards-ai-assistant/knowledge/</code>，
+      或者用环境变量 <code>KARDS_KNOWLEDGE_DIRS</code> 指定别的目录（Windows 用分号隔开）。
+      总共最多读 6 万字，规则会优先保留。</p>
+  </section>
+
+  <section class="warn">
+    <h2><span class="paw">!</span>主人要注意的三件小事</h2>
+    <ul>
+      <li>我操作的时候，<b>鼠标是真的被接管的</b>，请别再同时动它，不然会点歪。</li>
+      <li>只建议在<b>训练模式</b>里玩。排位或者对真人，输赢都可能让主人不开心喵。</li>
+      <li>用真实鼠标键盘操作可能违反游戏服务条款，有封号风险。这个风险主人要自己掂量一下。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="paw">❀</span>我不听话的时候</h2>
+    <ul>
+      <li><b>球不见了</b> → 到 Plugin Center 把插件停用再启用，球会回来</li>
+      <li><b>点了没反应</b> → 先看插件日志里有没有报错；再确认 KARDS 窗口标题里带 KARDS</li>
+      <li><b>点歪了 / 乱点</b> → 再点一次球立刻停下，然后回来告诉我哪里不对</li>
+      <li><b>忘记卡组</b> → 检查 <code>桌面/kards/kards_dahuayu.md</code> 里的卡组清单有没有填</li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="tail">♡ ── ♡ ── ♡</div>
+    大肥鱼会继续练习的喵，总有一天能打得更像真人。<br>
+    记得多陪陪我呀，主人 ♡
+  </footer>
+
+</main>
+</body>
+</html>
