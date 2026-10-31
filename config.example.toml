@@ -1,0 +1,7 @@
+[plugin_runtime]
+enabled = true
+auto_start = false
+
+[kards_ai_assistant]
+# Optional extra knowledge directories, separated by ; on Windows.
+knowledge_dirs = ""
